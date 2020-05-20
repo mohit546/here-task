@@ -26,7 +26,6 @@ class Home  extends Component {
     super(props);
 
     this.state = {
-      theme: 'normal.day',
       filterButtonsList: [
         {
           id: 1,
