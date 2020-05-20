@@ -18,6 +18,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "author": {
+    "name": "Mohit Patil",
+    "email": "mohitpatil546@gmail.com"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
