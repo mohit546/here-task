@@ -5,9 +5,11 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import RestaurantsMap from '../RestaurantsMap';
+import RestaurantsList from '../../data/germany-mcDonalds.json';
+// import FilterButtons from '../FilterButtons';
 
 const styles = theme => ({
   content: {
@@ -26,29 +28,72 @@ class Home  extends Component {
 
     this.state = {
       theme: 'normal.day',
+      filterButtonsList: [
+        {
+          id: 1,
+          name: `Subway`,
+          isSelected: true
+        },
+        {
+          id: 2,
+          name: `KFC`,
+          isSelected: true
+        },
+        {
+          id: 3,
+          name: `Burger King`,
+          isSelected: true
+        },
+        {
+          id: 4,
+          name: `McDonald`,
+          isSelected: true
+        }
+      ],
+      restaurantsList: RestaurantsList
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.toggleFilterButton(null);
+    }, 0);
+  }
+
+  toggleFilterButton(index) {
+    let list = this.state.filterButtonsList;
+
+    if(index != null) {
+      list[index].isSelected = !list[index].isSelected;
     }
 
-    this.onChange = this.onChange.bind(this);
-  }
-
-  onChange(evt) {
-    evt.preventDefault();
-
-    var change = evt.target.id;
-    console.log('selected ' + change);
-    this.setState({
-      "theme": change,
+    let resList = [];
+    list.map(button => {
+      if(button.isSelected) {
+        let temp = RestaurantsList.filter(restaurant => restaurant.name.includes(button.name));
+        resList = resList.concat(temp);
+      }
     });
-  }
 
+    this.setState({filterButtonsList: list, restaurantsList: resList});
+  }
 
   render() {
     const { classes } = this.props;
+
+    const filterButtons = (this.state.filterButtonsList || []).map((button, index) => (
+      <Button type="button" key={button.id} onClick={(e) => this.toggleFilterButton(index)} className={classes.customBtn} variant={`${button.isSelected ? 'contained': 'outlined'}`} size="small" color="primary">
+        {button.name}
+      </Button>
+    ));
+
     return (
       <div className={classes.content}>
         <Card variant="outlined">
           <CardActionArea>
-            <RestaurantsMap />
+
+            <RestaurantsMap list={this.state.restaurantsList}/>
+
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                 Filters
@@ -59,24 +104,14 @@ class Home  extends Component {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Button className={classes.customBtn} variant="outlined" size="small" color="primary" disableRipple>
-              Subway
-            </Button>
-            <Button className={classes.customBtn} variant="outlined" size="small" color="primary" disableRipple>
-              KFC
-            </Button>
-            <Button className={classes.customBtn} variant="outlined" size="small" color="primary" disableRipple>
-              Burger King
-            </Button>
-            <Button className={classes.customBtn} variant="outlined" size="small" color="primary" disableRipple>
-              McDonald's
-            </Button>
+            {
+              filterButtons
+            }
           </CardActions>
         </Card>
       </div>
     );
   }
-
 }
 
 Home.propTypes = {
