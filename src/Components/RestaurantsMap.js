@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Constants from '../constants';
 // import restaurantPin from '../assets/img/restaurant-pin.png';
 // import mcdonaldsPin from '../assets/img/mcdonalds-pin.png';
 // import kfcPin from '../assets/img/kfc-pin.png';
@@ -38,7 +39,7 @@ class RestaurantsMap extends Component {
   initializeMap() {
     const H = window.H;
     const platform = new H.service.Platform({
-      apikey: "o2MmlxW45F-Jf-55SXsChSYynJokhY1RzcePb9I8-lM"
+      apikey: Constants.API_KEY
     });
 
     const defaultLayers = platform.createDefaultLayers();
@@ -76,33 +77,54 @@ class RestaurantsMap extends Component {
     //       w = 75;
     //       h = 75;
     //     }
+        // let clusterMarker = new H.map.Marker(cluster.getPosition(), {
+        //   icon: new H.map.Icon(restaurantPin, {
+        //     size: {w: w, h: h},
+        //     anchor: { x: (w/2), y: (h/2) }
+        //   }),
+        //   min: cluster.getMinZoom(),
+        //   max: cluster.getMaxZoom()
+        // });
+        // clusterMarker.setData(data);
 
-    //     let clusterMarker = new H.map.Marker(cluster.getPosition(), {
-    //       icon: new H.map.Icon(restaurantPin, {
-    //         size: {w: w, h: h},
-    //         anchor: { x: (w/2), y: (h/2) }
-    //       }),
-    //       min: cluster.getMinZoom(),
-    //       max: cluster.getMaxZoom()
-    //     });
-    //     clusterMarker.setData(data);
-    //     return clusterMarker;
-    //   },
 
-    //   getNoisePresentation: (noisePoint) => {
-    //     let data = noisePoint.getData(),
-    //     noiseMarker = new H.map.Marker(noisePoint.getPosition(), {
-    //       min: noisePoint.getMinZoom(),
-    //       // max: 20,
-    //       icon: new H.map.Icon(restaurantPin, {
-    //         size: {w: 20, h: 20},
-    //         anchor: {x: 10, y: 10}
-    //       })
-    //     });
+        // clusterMarker.addEventListener("pointerenter", function (event) {
+        //   var point = event.target.getPosition(),
+        //   screenPosition = map.geoToScreen(point),
+        //   t = event.target,
+        //   data = t.getData(),
+        //   tooltipContent = "";
+        //   data.forEachEntry(function(p) {
+        //     tooltipContent += p.getPosition().lat + " " + p.getPosition().lng + "</br>";
+        //   });
+        //   infoBubble = new H.ui.InfoBubble(map.screenToGeo(screenPosition.x, screenPosition.y), { content: tooltipContent });
+        //   ui.addBubble(infoBubble);
+        // });
 
-    //     noiseMarker.setData(data);
+        // clusterMarker.addEventListener("pointerleave", function (event) {
+        //   if(infoBubble) {
+        //     ui.removeBubble(infoBubble);
+        //     infoBubble = null;
+        //   }
+        // });
 
-    //     return noiseMarker;
+      //   return clusterMarker;
+      // },
+
+      // getNoisePresentation: (noisePoint) => {
+      //   let data = noisePoint.getData(),
+      //   noiseMarker = new H.map.Marker(noisePoint.getPosition(), {
+      //     min: noisePoint.getMinZoom(),
+      //     // max: 20,
+      //     icon: new H.map.Icon(restaurantPin, {
+      //       size: {w: 20, h: 20},
+      //       anchor: {x: 10, y: 10}
+      //     })
+      //   });
+
+      //   noiseMarker.setData(data);
+
+        // return noiseMarker;
     //   }
     // };
 

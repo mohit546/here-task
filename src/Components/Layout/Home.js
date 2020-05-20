@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import RestaurantsMap from '../RestaurantsMap';
 import RestaurantsList from '../../data/germany-mcDonalds.json';
-// import FilterButtons from '../FilterButtons';
 
 const styles = theme => ({
   content: {
